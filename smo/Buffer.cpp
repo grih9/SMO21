@@ -24,7 +24,7 @@ bool Buffer::push(Request request)
             pushPosition_++;
             pushPosition_ = pushPosition_ % capacity_;
         }
-        std::cout << "Вставка в " << pushPosition_ << std::endl;
+        std::cout << "Insert in " << pushPosition_ << std::endl;
         buf_[pushPosition_] = request;
         volume_++;
         return true;
@@ -38,8 +38,8 @@ bool Buffer::push(Request request)
             }
         }
         buf_[minNum] = request;
-        std::cout << "Вытеснена заявка с generationTime " << minTime << " с позиции " << minNum << std::endl;
-        std::cout << "Вставка в " << minNum;
+        std::cout << "Removed request with generationTime " << minTime << " from " << minNum << std::endl;
+        std::cout << "Insert in " << minNum;
         pushPosition_ = (minNum + 1) % capacity_;
         return false;
     }
@@ -57,8 +57,8 @@ Request Buffer::pop()
         --volume_;
         return tmp;
     } else {
-        std::cerr << "Буфер пуст\n";
-        throw std::range_error("Буфер пуст\n");
+        std::cerr << "Buffer is empty\n";
+        throw std::range_error("Buffer is empty\n");
     }
 }
 

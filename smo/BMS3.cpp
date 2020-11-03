@@ -7,14 +7,13 @@ void BMS3::work()
     drawGraph();
 }
 
-
 void BMS3::printResults()
 {
-    std::cout << "Результаты\n";
+    std::cout << "Results\n";
 }
 
 void BMS3::drawGraph()
 {
-    std::cout << "Графики\n";
+    std::cout << "Graphics\n";
 }
 

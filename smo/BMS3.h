@@ -12,4 +12,4 @@ private:
 };
 
 
-#endif //SMO_BMS3_H
+#endif

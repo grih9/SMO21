@@ -31,15 +31,13 @@ int main()
     BOS_TYPE bosType = BOS_TYPE::SOURCE;
     int tmpNum = 0;
 
-    std::cout << time;
-
     for (int i = 0; i < Properties::devicesNum; ++i) {
         if (devices[i].getReleaseTime() < minTime && !devices[i].isWaiting()) {
             minTime = devices[i].getReleaseTime();
             bosType = BOS_TYPE::DEVICE;
             tmpNum = i;
         }
-    }       // освобождение прибора
+    }       // device's release
 
     for (int i = 0; i < Properties::sourcesNum; ++i) {
         if (sources[i].getNextReqTime() < minTime) {
@@ -47,23 +45,23 @@ int main()
             bosType = BOS_TYPE::SOURCE;
             tmpNum = i;
         }
-    }   // генерация заявки
+    }   // request generation
 
     switch (bosType) {
         case BOS_TYPE::DEVICE: {
             if (buffer.isEmpty()) {
-                std::cout << "Освобождение прибора " << tmpNum <<", но пустой буфер. Простой прибора\n";
+                std::cout << "Release of the device " << tmpNum <<", but buffer is empty. Device is waiting\n";
                 time = devices[tmpNum].release();
                 devices[tmpNum].wait();
-                std::cout << time << std::endl;
+                std::cout << "Time: " << time << std::endl;
             } else {
-                std::cout << "Освобождение прибора" << tmpNum << std::endl;
+                std::cout << "Release of the device" << tmpNum << std::endl;
                 time = devices[tmpNum].release();
-                std::cout << time << std::endl;
-                std::cout << "Постановка заявка на обслуживание на прибор" << tmpNum << std::endl;
+                std::cout << "Time: " << time << std::endl;
+                std::cout << "Placing a request on the device " << tmpNum << std::endl;
                 Request r = buffer.pop();
-                std::cout << "Запрос " << r.getRequestNumber()[0] << r.getRequestNumber()[1]
-                          <<  ". Время поступления" << r.getGenerationTime() << std::endl;
+                std::cout << "Request " << r.getRequestNumber()[0] << r.getRequestNumber()[1]
+                          <<  ". Generation time " << r.getGenerationTime() << std::endl;
                 devices[tmpNum].take(time);
             }
         }
@@ -78,15 +76,13 @@ int main()
             time = sources[tmpNum].getNextReqTime();
             if (devNum != -1) {
                 Request r = sources[tmpNum].generate(time);
-                std::cout << "Постановка заявка на обслуживание на прибор" << devNum << std::endl;
-                std::cout << "Запрос " << r.getRequestNumber()[0] << r.getRequestNumber()[1]
-                          <<  ". Время поступления" << r.getGenerationTime() << std::endl;
-                devices[tmpNum].take(time);
+                std::cout << "Time: " << time << ": ";
+                std::cout << "Placing a request on the device " << devNum << std::endl;
+                std::cout << "Request " << r.getRequestNumber()[0] << r.getRequestNumber()[1]
+                          <<  ". Generation time " << r.getGenerationTime() << std::endl;
+                devices[devNum].take(time);
             }
-
         }
-
     }
-
     return 0;
 }

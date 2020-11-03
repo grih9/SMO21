@@ -21,7 +21,7 @@ Device::Device(int num):
 double Device::release()
 {
     isAvailable_ = true;
-    std::cout << "Прибор " << num_ <<" свободен " << std::endl;
+    std::cout << "Device " << num_ <<" is free " << std::endl;
     return releaseTime_;
 }
 
@@ -30,8 +30,8 @@ double Device::take(double time) {
     isWaiting_ = false;
     double r = rand() / double(RAND_MAX);
     releaseTime_ = time + (-1.0/Properties::lambda * log(r));
-    std::cout << "Прибор " << num_ <<" получил заявку " << std::endl;
-    std::cout << "Время будущего освобождения " << releaseTime_ << std::endl;
+    std::cout << "Device " << num_ <<" took a request " << std::endl;
+    std::cout << "Future release time is " << releaseTime_ << std::endl;
     return releaseTime_;
 }
 
