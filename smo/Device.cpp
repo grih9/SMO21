@@ -28,8 +28,10 @@ double Device::release()
 double Device::take(double time) {
     isAvailable_ = false;
     isWaiting_ = false;
-    double r = rand() / double(RAND_MAX);
-    releaseTime_ = time + (-1.0/Properties::lambda * log(r));
+   // double r = rand() / double(RAND_MAX);
+   // releaseTime_ = time + (-1.0/Properties::lambda * log(r));
+   // double r = rand() / double(RAND_MAX);
+    releaseTime_ = time + 2;
     std::cout << "Device " << num_ <<" took a request " << std::endl;
     std::cout << "Future release time is " << releaseTime_ << std::endl;
     return releaseTime_;

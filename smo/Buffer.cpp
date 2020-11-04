@@ -54,6 +54,7 @@ Request Buffer::pop()
             popPosition_ = popPosition_ % capacity_;
         }
         Request tmp = buf_[popPosition_];
+        std::cout << "Extract from " << popPosition_ << std::endl;
         buf_[popPosition_] = Request();
         --volume_;
         return tmp;
@@ -75,10 +76,10 @@ bool Buffer::isEmpty() const
 
 void Buffer::printBufferInfo() const
 {
-    std::cout << "Capacity = " << capacity_ << ", used = " << volume_ << std::endl;
-    std::cout << "Push ptr = " << pushPosition_ << ", pop ptr = " << popPosition_ << std::endl;
+    std::cout << "\tCapacity = " << capacity_ << ", used = " << volume_ << std::endl;
+    std::cout << "\tPush ptr = " << pushPosition_ << ", pop ptr = " << popPosition_ << std::endl;
     for (int i = 0; i < Properties::bufferCapacity; ++i) {
-        std::cout << i << ": ";
+        std::cout << "\t" << i << ": ";
         double t = buf_[i].getGenerationTime();
         if (t == -1) {
             std::cout << "Empty\n";
