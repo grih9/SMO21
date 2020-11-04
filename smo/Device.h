@@ -9,15 +9,16 @@ public:
     double take(double);
     double release();
     void wait();
-    double getReleaseTime();
-    bool availability();
-    bool isWaiting();
+    double getReleaseTime() const;
+    bool availability() const;
+    bool isWaiting() const;
+    int getNum() const;
 
 private:
-    bool isAvailable_;
-    bool isWaiting_;
     double releaseTime_;
     int num_;
+    bool isAvailable_;
+    bool isWaiting_;
 };
 
 

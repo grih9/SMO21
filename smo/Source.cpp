@@ -33,3 +33,11 @@ Request Source::generate(double time)
 double Source::getNextReqTime() const {
     return nextReqTime_;
 }
+
+int Source::getSourceCount() const {
+    return sourceCount_;
+}
+
+int Source::getSourceNum() const {
+    return sourceNum_;
+}

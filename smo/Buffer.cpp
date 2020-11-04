@@ -1,5 +1,6 @@
 #include "Buffer.h"
 #include <iostream>
+#include "properties.h"
 
 Buffer::Buffer():
     Buffer(0)
@@ -13,7 +14,7 @@ Buffer::Buffer(int capacity):
         volume_(0)
 {
     for (int i = 0; i < capacity; i++) {
-        buf_[i] = Request();
+        buf_[i] = Request(-1, 0, 0);
     }
 }
 
@@ -70,4 +71,19 @@ bool Buffer::isFull() const
 bool Buffer::isEmpty() const
 {
     return volume_ == 0;
+}
+
+void Buffer::printBufferInfo() const
+{
+    std::cout << "Capacity = " << capacity_ << ", used = " << volume_ << std::endl;
+    std::cout << "Push ptr = " << pushPosition_ << ", pop ptr = " << popPosition_ << std::endl;
+    for (int i = 0; i < Properties::bufferCapacity; ++i) {
+        std::cout << i << ": ";
+        double t = buf_[i].getGenerationTime();
+        if (t == -1) {
+            std::cout << "Empty\n";
+        } else {
+            std::cout << buf_[i].getRequestNumber()[0] << buf_[i].getRequestNumber()[1] << ", generation time = " << t << std::endl;
+        }
+    }
 }

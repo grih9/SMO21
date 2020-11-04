@@ -10,13 +10,15 @@ public:
     Source(double, int, int, double);
 
     double getNextReqTime() const;
+    int getSourceNum() const;
+    int getSourceCount() const;
     Request generate(double);
 
 private:
     double lambda_;
+    double nextReqTime_;
     int sourceNum_;
     int sourceCount_;
-    double nextReqTime_;
 };
 
 #endif

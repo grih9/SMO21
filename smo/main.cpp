@@ -10,20 +10,34 @@ enum class BOS_TYPE {
     SOURCE
 };
 
+void printinfo(const Device * devices, const Source * sources, const Buffer * buffer)
+{
+    std::cout << "\nDevices:\n";
+    for (int i = 0; i < Properties::devicesNum; ++i) {
+        std::cout << devices[i].getNum() << ". Release time: " << devices[i].getReleaseTime() << ". Status: w - "
+                  << (devices[i].isWaiting() ? "Yes" : "No") << ", a - " << (devices[i].availability() ? "Yes" : "No") << std::endl;
+    }
+
+    std::cout << "\nSources:\n";
+    for (int i = 0; i < Properties::sourcesNum; ++i) {
+        std::cout << sources[i].getSourceNum() << ". Generated: " << sources[i].getSourceCount() << ", Next request: "
+                  << sources[i].getNextReqTime() << "\n";
+
+    }
+    std::cout << "\nBuffer:\n";
+    buffer->printBufferInfo();
+    std::cout << "\n";
+}
+
 int main()
 {
     srand(time(0));
     rand();
-    Device devices[Properties::devicesNum];
-    Source sources[Properties::sourcesNum];
-    Buffer buffer(Properties::bufferCapacity);
 
-    devices[0] = Device(1);
-    devices[1] = Device(2);
-    devices[2] = Device(3);
-    sources[0] = Source(Properties::lambda, 1);
-    sources[1] = Source(Properties::lambda, 2);
-    sources[2] = Source(Properties::lambda, 3);
+    Device devices[Properties::devicesNum] = { Device(1), Device(2), Device(3) };
+    Source sources[Properties::sourcesNum] = { Source(Properties::lambda, 1), Source(Properties::lambda, 2), Source(Properties::lambda, 3) };
+    std::cout << devices[0].availability();
+    Buffer buffer(Properties::bufferCapacity);
 
     double time = 0;
 
@@ -46,6 +60,8 @@ int main()
             tmpNum = i;
         }
     }   // request generation
+
+    printinfo(devices, sources, &buffer);
 
     switch (bosType) {
         case BOS_TYPE::DEVICE: {

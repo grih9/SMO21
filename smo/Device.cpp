@@ -35,18 +35,22 @@ double Device::take(double time) {
     return releaseTime_;
 }
 
-double Device::getReleaseTime() {
+double Device::getReleaseTime() const {
     return releaseTime_;
 }
 
-bool Device::availability() {
+bool Device::availability() const {
     return isAvailable_;
 }
 
-bool Device::isWaiting() {
+bool Device::isWaiting() const {
     return isWaiting_;
 }
 
 void Device::wait() {
     isWaiting_ = true;
+}
+
+int Device::getNum() const {
+    return num_;
 }
