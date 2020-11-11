@@ -1,6 +1,5 @@
 #include "Buffer.h"
 #include <iostream>
-#include "properties.h"
 
 Buffer::Buffer():
     Buffer(0)
@@ -28,6 +27,7 @@ bool Buffer::push(Request request)
         std::cout << "Insert in " << pushPosition_ << std::endl;
         buf_[pushPosition_] = request;
         volume_++;
+        pushPosition_ = (pushPosition_ + 1) % capacity_;
         return true;
     } else {
         int minNum = 0;
@@ -38,9 +38,10 @@ bool Buffer::push(Request request)
                 minTime = buf_[i].getGenerationTime();
             }
         }
+        std::cout << "Removed request " << buf_[minNum].getRequestNumber()[0] << buf_[minNum].getRequestNumber()[1]
+                  << " with generationTime " << minTime << " from " << minNum << std::endl;
         buf_[minNum] = request;
-        std::cout << "Removed request with generationTime " << minTime << " from " << minNum << std::endl;
-        std::cout << "Insert in " << minNum;
+        std::cout << "Insert in " << minNum << std::endl;
         pushPosition_ = (minNum + 1) % capacity_;
         return false;
     }
@@ -57,6 +58,7 @@ Request Buffer::pop()
         std::cout << "Extract from " << popPosition_ << std::endl;
         buf_[popPosition_] = Request();
         --volume_;
+        popPosition_ = (popPosition_ + 1) % capacity_;
         return tmp;
     } else {
         std::cerr << "Buffer is empty\n";

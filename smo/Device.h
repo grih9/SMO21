@@ -4,7 +4,7 @@
 class Device {
 public:
     Device();
-    Device(int);
+    Device(int, double);
 
     double take(double);
     double release();
@@ -13,8 +13,11 @@ public:
     bool availability() const;
     bool isWaiting() const;
     int getNum() const;
+    double getNumberOfTaken() const;
 
 private:
+    double lambda_;
+    double numberOfTaken_;
     double releaseTime_;
     int num_;
     bool isAvailable_;

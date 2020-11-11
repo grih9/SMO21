@@ -3,7 +3,7 @@
 
 struct Properties {
     static const int sourcesNum = 3;
-    static const int lambda = 1;
+    static constexpr double lambda = 0.7;
     static const int devicesNum = 3;
     static const int bufferCapacity = 5;
 };

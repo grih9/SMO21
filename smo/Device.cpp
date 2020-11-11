@@ -6,11 +6,13 @@
 
 
 Device::Device():
-    Device(0)
+    Device(0, 1)
 {
 }
 
-Device::Device(int num):
+Device::Device(int num, double lambda):
+    lambda_(lambda),
+    numberOfTaken_(0),
     isAvailable_(true),
     releaseTime_(0),
     num_(num),
@@ -21,17 +23,14 @@ Device::Device(int num):
 double Device::release()
 {
     isAvailable_ = true;
-    std::cout << "Device " << num_ <<" is free " << std::endl;
     return releaseTime_;
 }
 
 double Device::take(double time) {
     isAvailable_ = false;
     isWaiting_ = false;
-   // double r = rand() / double(RAND_MAX);
-   // releaseTime_ = time + (-1.0/Properties::lambda * log(r));
-   // double r = rand() / double(RAND_MAX);
-    releaseTime_ = time + 2;
+    numberOfTaken_++;
+    releaseTime_ = time + exp(lambda_);
     std::cout << "Device " << num_ <<" took a request " << std::endl;
     std::cout << "Future release time is " << releaseTime_ << std::endl;
     return releaseTime_;
@@ -55,4 +54,8 @@ void Device::wait() {
 
 int Device::getNum() const {
     return num_;
+}
+
+double Device::getNumberOfTaken() const {
+    return numberOfTaken_;
 }

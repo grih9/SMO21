@@ -5,7 +5,7 @@
 #include "Source.h"
 #include "Buffer.h"
 
-//FIXME: ВЫВОД ИНФОРМАЦИИ ПРО ВЫТЕСНЕНИЕ ИЗ БУФЕРА, ПОИНТЕР ПРИ ВЫТЕСНЕНИИ ИЗ БУФЕРА, ЭКСПОНЕНЦИАЛЬНОЕ РАСПРЕДЕЛЕНИЕ, ВЫВОД ИНФОРМАЦИИ ПОСЛЕ ОСВОБОЖДЕНИЯ ПРИБОРА
+//FIXME: ВЫВОД ИНФОРМАЦИИ ПРО ВЫТЕСНЕНИЕ ИЗ БУФЕРА, ПОИНТЕР ПРИ ВЫТЕСНЕНИИ ИЗ БУФЕРА, ((ЭКСПОНЕНЦИАЛЬНОЕ РАСПРЕДЕЛЕНИЕ)), ВЫВОД ИНФОРМАЦИИ ПОСЛЕ ОСВОБОЖДЕНИЯ ПРИБОРА
 enum class BOS_TYPE {
     DEVICE,
     SOURCE
@@ -16,7 +16,8 @@ void printinfo(const Device * devices, const Source * sources, const Buffer * bu
     std::cout << "Devices:\n";
     for (int i = 0; i < Properties::devicesNum; ++i) {
         std::cout << "\t" << devices[i].getNum() << ". Release time: " << devices[i].getReleaseTime() << ". Status: w - "
-                  << (devices[i].isWaiting() ? "Yes" : "No") << ", a - " << (devices[i].availability() ? "Yes" : "No") << std::endl;
+                  << (devices[i].isWaiting() ? "Yes" : "No") << ", a - " << (devices[i].availability() ? "Yes" : "No")
+                  << ". Taken = " << devices[i].getNumberOfTaken() << std::endl;
     }
 
     std::cout << "Sources:\n";
@@ -35,8 +36,8 @@ int main()
     srand(time(0));
     rand();
 
-    Device devices[Properties::devicesNum] = { Device(1), Device(2), Device(3) };
-    Source sources[Properties::sourcesNum] = { Source(Properties::lambda, 1), Source(Properties::lambda, 2), Source(Properties::lambda, 3) };
+    Device devices[Properties::devicesNum] = { Device(1, Properties::lambda), Device(2, Properties::lambda), Device(3, Properties::lambda) };
+    Source sources[Properties::sourcesNum] = { Source(1, Properties::lambda), Source(2, Properties::lambda), Source(3, Properties::lambda) };
     Buffer buffer(Properties::bufferCapacity);
 
     double time = 0;
@@ -68,14 +69,17 @@ int main()
             case BOS_TYPE::DEVICE: {
                 if (buffer.isEmpty()) {
                     time = devices[tmpNum].release();
-                    devices[tmpNum].wait();
                     std::cout << "Time: " << time << std::endl;
-                    std::cout << "Release of the device " << devices[tmpNum].getNum() << ", but buffer is empty. Device is waiting\n";
+                    std::cout << "Release of the device " << devices[tmpNum].getNum() << std::endl;
+                    printinfo(devices, sources, &buffer);
+                    std::cout << "Buffer is empty. Device is waiting\n";
+                    devices[tmpNum].wait();
                     printinfo(devices, sources, &buffer);
                 } else {
                     time = devices[tmpNum].release();
                     std::cout << "Time: " << time << std::endl;
-                    std::cout << "Release of the device" << devices[tmpNum].getNum() << std::endl;
+                    std::cout << "Release of the device " << devices[tmpNum].getNum() << std::endl;
+                    printinfo(devices, sources, &buffer);
                     std::cout << "Placing a request from buffer on the device " << devices[tmpNum].getNum() << std::endl;
                     Request r = buffer.pop();
                     std::cout << "Request " << r.getRequestNumber()[0] << r.getRequestNumber()[1]

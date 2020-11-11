@@ -6,8 +6,8 @@
 class Source {
 public:
     Source();
-    Source(double, int);
-    Source(double, int, int, double);
+    Source(int, double);
+    Source(int, double, int, double);
 
     double getNextReqTime() const;
     int getSourceNum() const;

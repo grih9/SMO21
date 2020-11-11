@@ -9,12 +9,12 @@ Source::Source():
 
 }
 
-Source::Source(double lambda, int num):
-    Source(lambda, num, 0, (-1.0/Properties::lambda * log(rand() / double(RAND_MAX))))
+Source::Source(int num, double lambda):
+    Source(num, lambda, 0, (-1.0 / lambda * log(rand() / double(RAND_MAX))))
 {
 }
 
-Source::Source(double lambda, int num, int count, double nextReqTime):
+Source::Source(int num, double lambda, int count, double nextReqTime):
     lambda_(lambda),
     sourceNum_(num),
     sourceCount_(count),
