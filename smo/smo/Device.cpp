@@ -13,9 +13,9 @@ Device::Device():
 Device::Device(int num, double lambda):
     lambda_(lambda),
     numberOfTaken_(0),
-    isAvailable_(true),
     releaseTime_(0),
     num_(num),
+    isAvailable_(true),
     isWaiting_(true)
 {
 }

@@ -16,9 +16,9 @@ Source::Source(int num, double lambda):
 
 Source::Source(int num, double lambda, int count, double nextReqTime):
     lambda_(lambda),
+    nextReqTime_(nextReqTime),
     sourceNum_(num),
-    sourceCount_(count),
-    nextReqTime_(nextReqTime)
+    sourceCount_(count)
 {
 }
 
