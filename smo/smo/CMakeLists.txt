@@ -49,6 +49,8 @@ else()
     nextwindow.cpp
     nextwindow.h
     nextwindow.ui
+    BMS.h
+    BMS.cpp
   )
 endif()
 

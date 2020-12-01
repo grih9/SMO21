@@ -1,14 +1,13 @@
-/*#include <iostream>
+#include "BMS.h"
+#include <iostream>
 #include <time.h>
 #include "properties.h"
 #include "Device.h"
 #include "Source.h"
 #include "Buffer.h"
 #include "dialog.h"
-#include "BMS2.h"
 
-
-bool BMS2::flagNext = true;
+bool BMS::flagNext = true;
 
 enum class BOS_TYPE {
     DEVICE,
@@ -35,14 +34,7 @@ void printinfo(const Device * devices, const Source * sources, const Buffer * bu
     std::cout << "\n";
 }
 
-BMS2::BMS2(QObject * parent):
-  QThread(parent)
-{
-}
-
-BMS2::~BMS2()
-{}
-void BMS2::run() {
+void BMS::doWork() {
   srand(time(0));
   rand();
 
@@ -54,7 +46,7 @@ void BMS2::run() {
   std::cout << "Time: " << time << std::endl;
   printinfo(devices, sources, &buffer);
 
-  while (BMS2::flagNext == true) {
+  while (BMS::flagNext == true) {
     double minTime = sources[0].getNextReqTime();
     BOS_TYPE bosType = BOS_TYPE::SOURCE;
     int tmpNum = 0;
@@ -133,4 +125,9 @@ void BMS2::run() {
     { }
   }
 }
-*/
+
+void BMS::setTrue()
+{
+  flagNext = true;
+}
+

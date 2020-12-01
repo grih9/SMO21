@@ -2,6 +2,7 @@
 #define NEXTWINDOW_H
 
 #include <QDialog>
+#include <QThread>
 
 namespace Ui {
   class nextwindow;
@@ -10,7 +11,7 @@ namespace Ui {
 class nextwindow : public QDialog
 {
   Q_OBJECT
-
+  QThread programmThread;
 public:
   explicit nextwindow(QWidget * parent = nullptr);
   ~nextwindow();
@@ -18,6 +19,9 @@ public:
 
 private slots:
   void on_nextButton_clicked();
+signals:
+  void next();
+  void operate(const QString &);
 
 private:
   Ui::nextwindow * ui;
