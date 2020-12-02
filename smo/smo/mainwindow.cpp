@@ -7,7 +7,9 @@ MainWindow::MainWindow(QWidget * parent):
   ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
-  ui->startButton->setStyle(QStyleFactory::create("Fusion"));
+  ui->stepButton->setStyle(QStyleFactory::create("Fusion"));
+  ui->autoButton->setStyle(QStyleFactory::create("Fusion"));
+
 }
 
 MainWindow::~MainWindow()
@@ -15,7 +17,7 @@ MainWindow::~MainWindow()
   delete ui;
 }
 
-void MainWindow::on_startButton_clicked()
+void MainWindow::on_stepButton_clicked()
 {
   nextWindow = new nextwindow();
   nextWindow->show();

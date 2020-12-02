@@ -5,21 +5,23 @@
 
 class Buffer {
 public:
-    Buffer();
-    Buffer(int);
+  Buffer();
+  Buffer(int);
 
-    bool push(Request request);
-    Request pop();
-    bool isFull() const;
-    bool isEmpty() const;
-    void printBufferInfo() const;
+  bool push(Request request);
+  Request pop();
+  bool isFull() const;
+  bool isEmpty() const;
+  void printBufferInfo() const;
+  int getCancelled() const;
 
 private:
-    Request buf_[Properties::bufferCapacity];
-    int capacity_;
-    int pushPosition_;
-    int popPosition_;
-    int volume_;
+  Request buf_[Properties::bufferCapacity];
+  int capacity_;
+  int cancelled_;
+  int pushPosition_;
+  int popPosition_;
+  int volume_;
 };
 
 #endif

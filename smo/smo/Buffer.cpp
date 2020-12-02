@@ -9,6 +9,7 @@ Buffer::Buffer():
 Buffer::Buffer(int capacity):
         capacity_(capacity),
         pushPosition_(0),
+        cancelled_(0),
         popPosition_(0),
         volume_(0)
 {
@@ -41,12 +42,17 @@ bool Buffer::push(Request request)
         std::cout << "Removed request " << buf_[minNum].getRequestNumber()[0] << buf_[minNum].getRequestNumber()[1]
                   << " with generationTime " << minTime << " from " << minNum << std::endl;
         buf_[minNum] = request;
+        cancelled_++;
         std::cout << "Insert in " << minNum << std::endl;
         pushPosition_ = (minNum + 1) % capacity_;
         return false;
     }
 }
 
+int Buffer::getCancelled() const
+{
+  return cancelled_;
+}
 Request Buffer::pop()
 {
     if (volume_ != 0) {
@@ -78,7 +84,7 @@ bool Buffer::isEmpty() const
 
 void Buffer::printBufferInfo() const
 {
-    std::cout << "\tCapacity = " << capacity_ << ", used = " << volume_ << std::endl;
+    std::cout << "\tCapacity = " << capacity_ << ", used = " << volume_ << ", cancelled = " << cancelled_ << std::endl;
     std::cout << "\tPush ptr = " << pushPosition_ << ", pop ptr = " << popPosition_ << std::endl;
     for (int i = 0; i < Properties::bufferCapacity; ++i) {
         std::cout << "\t" << i << ": ";

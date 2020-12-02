@@ -19,7 +19,7 @@ public:
 
 
 private slots:
-  void on_startButton_clicked();
+  void on_stepButton_clicked();
 private:
   Ui::MainWindow * ui;
   nextwindow * nextWindow;
