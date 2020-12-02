@@ -2,6 +2,7 @@
 #include "ui_nextwindow.h"
 #include <iostream>
 #include <BMS.h>
+#include <mainwindow.h>
 
 int nextwindow::counter = 0;
 
@@ -11,14 +12,12 @@ nextwindow::nextwindow(QWidget * parent) :
 {
   BMS * programm = new BMS();
   programm->moveToThread(&programmThread);
-  std::string a = std::to_string(counter);
-  QString tmp = a.c_str();
   ui->setupUi(this);
-  ui->textBrowser->setText(tmp);
   connect(this, &nextwindow::next, programm, &BMS::setTrue);
   connect(this, &nextwindow::operate, programm, &BMS::doWork);
+  connect(programm, &BMS::string, this, &nextwindow::setMessage);
   programmThread.start();
-  emit operate("1");
+
 }
 
 nextwindow::~nextwindow()
@@ -29,10 +28,27 @@ nextwindow::~nextwindow()
 
 void nextwindow::on_nextButton_clicked()
 {
-  counter = counter + 1;
-  BMS::flagNext = true;
-  std::string a = std::to_string(counter);
-  QString tmp = a.c_str();
+  if (counter == 0) {
+    ui->nextButton->setText("СЛЕДУЮЩИЙ");
+    counter = counter + 1;
+    BMS::flagNext = false;
+    emit operate("1");
+  } else {
+    counter = counter + 1;
+    BMS::flagNext = true;
+    emit next();
+  }
+}
+
+void nextwindow::setMessage(const QString & tmp)
+{
   ui->textBrowser->setText(tmp);
-  emit next();
+}
+
+void nextwindow::on_retButton_clicked()
+{
+  emit ret();
+  BMS::flagEnd = true;
+  counter = 0;
+  this->close();
 }

@@ -2,50 +2,97 @@
 #include <iostream>
 #include <time.h>
 #include "properties.h"
-#include "Device.h"
-#include "Source.h"
-#include "Buffer.h"
-#include "dialog.h"
 
 bool BMS::flagNext = true;
+bool BMS::flagEnd = false;
 
 enum class BOS_TYPE {
     DEVICE,
     SOURCE
 };
 
-void printinfo(const Device * devices, const Source * sources, const Buffer * buffer)
+void BMS::printinfo(const Device * devices, const Source * sources, const Buffer * buffer)
 {
-    std::cout << "Devices:\n";
-    for (int i = 0; i < Properties::devicesNum; ++i) {
-        std::cout << "\t" << devices[i].getNum() << ". Release time: " << devices[i].getReleaseTime() << ". Status: w - "
-                  << (devices[i].isWaiting() ? "Yes" : "No") << ", a - " << (devices[i].availability() ? "Yes" : "No")
-                  << ". Taken = " << devices[i].getNumberOfTaken() << std::endl;
-    }
+  QString str("Devices: ");
+  std::string a = std::to_string(1);
+  QString tmp = a.c_str();
+  std::cout << "Devices:\n";
+  for (int i = 0; i < Properties::devicesNum; ++i) {
+    str.append("\t");
+    a = std::to_string(devices[i].getNum());
+    tmp = a.c_str();
+    str.append(tmp);
+    str.append(". Release time: ");
+    a = std::to_string(devices[i].getReleaseTime());
+    tmp = a.c_str();
+    str.append(tmp);
+    str.append(". Status: w - ");
+    str.append((devices[i].isWaiting() ? "Yes" : "No"));
+    str.append(", a - ");
+    str.append((devices[i].availability() ? "Yes" : "No"));
+    str.append(". Taken = ");
+    a = std::to_string(devices[i].getNumberOfTaken());
+    tmp = a.c_str();
+    str.append(tmp);
+    str.append("\n");
+    std::cout << "\t" << devices[i].getNum() << ". Release time: " << devices[i].getReleaseTime() << ". Status: w - "
+              << (devices[i].isWaiting() ? "Yes" : "No") << ", a - " << (devices[i].availability() ? "Yes" : "No")
+              << ". Taken = " << devices[i].getNumberOfTaken() << std::endl;
+  }
 
-    std::cout << "Sources:\n";
-    for (int i = 0; i < Properties::sourcesNum; ++i) {
-        std::cout << "\t" << sources[i].getSourceNum() << ". Generated: " << sources[i].getSourceCount() << ", Next request: "
-                  << sources[i].getNextReqTime() << "\n";
+  str.append("Sources:\n");
+  std::cout << "Sources:\n";
+  for (int i = 0; i < Properties::sourcesNum; ++i) {
+    str.append("\t");
+    a = std::to_string(sources[i].getSourceNum());
+    tmp = a.c_str();
+    str.append(tmp);
+    str.append(". Generated: ");
+    a = std::to_string(sources[i].getSourceCount());
+    tmp = a.c_str();
+    str.append(tmp);
+    str.append(", Next request: ");
+    a = std::to_string(sources[i].getNextReqTime());
+    tmp = a.c_str();
+    str.append(tmp);
+    str.append("\n");
+    std::cout << "\t" << sources[i].getSourceNum() << ". Generated: " << sources[i].getSourceCount() << ", Next request: "
+              << sources[i].getNextReqTime() << "\n";
 
-    }
-    std::cout << "Buffer:\n";
-    buffer->printBufferInfo();
-    std::cout << "\n";
+  }
+  str.append("Buffer:\n");
+  std::cout << "Buffer:\n";
+  emit string(str);
+  buffer->printBufferInfo();
+  std::cout << "\n";
 }
 
 void BMS::doWork() {
+  flagEnd = false;
   srand(time(0));
   rand();
 
-  Device devices[Properties::devicesNum] = { Device(1, Properties::lambda), Device(2, Properties::lambda), Device(3, Properties::lambda) };
-  Source sources[Properties::sourcesNum] = { Source(1, Properties::lambda), Source(2, Properties::lambda), Source(3, Properties::lambda) };
+  Device devices[7] = { Device(1, Properties::lambdaDevices), Device(2, Properties::lambdaDevices), Device(3, Properties::lambdaDevices) };
+  Source sources[7] = { Source(1, Properties::lambdaSources), Source(2, Properties::lambdaSources), Source(3, Properties::lambdaSources) };
   Buffer buffer(Properties::bufferCapacity);
 
   double time = 0;
+  QString str("Time: ");
+  std::string a = std::to_string(time);
+  QString tmp = a.c_str();
+  str.append(tmp);
+  emit string(str);
   std::cout << "Time: " << time << std::endl;
   printinfo(devices, sources, &buffer);
 
+  while (flagNext == false) {
+    if (flagEnd == true) {
+      break;
+    }
+  }
+  if (flagEnd == true) {
+    flagNext = false;
+  }
   while (BMS::flagNext == true) {
     double minTime = sources[0].getNextReqTime();
     BOS_TYPE bosType = BOS_TYPE::SOURCE;
@@ -121,8 +168,14 @@ void BMS::doWork() {
       }
     }
     flagNext = false;
-    while (flagNext == false)
-    { }
+    while (flagNext == false) {
+      if (flagEnd == true) {
+        break;
+      }
+    }
+    if (flagEnd == true) {
+      break;
+    }
   }
 }
 

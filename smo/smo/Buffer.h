@@ -16,7 +16,7 @@ public:
   int getCancelled() const;
 
 private:
-  Request buf_[Properties::bufferCapacity];
+  Request buf_[10];
   int capacity_;
   int cancelled_;
   int pushPosition_;

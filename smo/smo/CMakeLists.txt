@@ -39,6 +39,7 @@ else()
     BMS3.cpp
     BMS3.h
     properties.h
+    properies.cpp
     main.cpp
     mainwindow.cpp
     mainwindow.h
@@ -51,6 +52,9 @@ else()
     nextwindow.ui
     BMS.h
     BMS.cpp
+    settingswindow.cpp
+    settingswindow.h
+    settingswindow.ui
   )
 endif()
 

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "nextwindow.h"
+#include "settingswindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,8 +21,11 @@ public:
 
 private slots:
   void on_stepButton_clicked();
+  void on_settingsButton_clicked();
+  void on_autoButton_clicked();
 private:
   Ui::MainWindow * ui;
+  settingsWindow * settings;
   nextwindow * nextWindow;
 };
 
