@@ -56,6 +56,6 @@ int Device::getNum() const {
     return num_;
 }
 
-double Device::getNumberOfTaken() const {
+int Device::getNumberOfTaken() const {
     return numberOfTaken_;
 }

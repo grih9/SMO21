@@ -1,5 +1,6 @@
 #include "Buffer.h"
 #include <iostream>
+#include <QString>
 
 Buffer::Buffer():
     Buffer(0)
@@ -82,17 +83,56 @@ bool Buffer::isEmpty() const
     return volume_ == 0;
 }
 
-void Buffer::printBufferInfo() const
+void Buffer::printBufferInfo(QString & str) const
 {
     std::cout << "\tCapacity = " << capacity_ << ", used = " << volume_ << ", cancelled = " << cancelled_ << std::endl;
+    str.append("\tCapacity = ");
+    std::string a = std::to_string(capacity_);
+    QString tmp = a.c_str();
+    str.append(tmp);
+    str.append(", used = ");
+    a = std::to_string(volume_);
+    tmp = a.c_str();
+    str.append(tmp);
+    str.append(", cancelled = ");
+    a = std::to_string(cancelled_);
+    tmp = a.c_str();
+    str.append(tmp);
+    str.append("\n");
     std::cout << "\tPush ptr = " << pushPosition_ << ", pop ptr = " << popPosition_ << std::endl;
+    str.append("\tPush ptr = ");
+    a = std::to_string(pushPosition_);
+    tmp = a.c_str();
+    str.append(tmp);
+    str.append(", pop ptr = ");
+    a = std::to_string(popPosition_);
+    tmp = a.c_str();
+    str.append(tmp);
+    str.append("\n");
     for (int i = 0; i < Properties::bufferCapacity; ++i) {
         std::cout << "\t" << i << ": ";
+        str.append("\t");
+        a = std::to_string(i);
+        tmp = a.c_str();
+        str.append(tmp);
+        str.append(": ");
         double t = buf_[i].getGenerationTime();
         if (t == -1) {
             std::cout << "Empty\n";
+            str.append("Empty\n");
         } else {
             std::cout << buf_[i].getRequestNumber()[0] << buf_[i].getRequestNumber()[1] << ", generation time = " << t << std::endl;
+            a = std::to_string(buf_[i].getRequestNumber()[0]);
+            tmp = a.c_str();
+            str.append(tmp);
+            a = std::to_string(buf_[i].getRequestNumber()[1]);
+            tmp = a.c_str();
+            str.append(tmp);
+            str.append(", generation time = ");
+            a = std::to_string(t);
+            tmp = a.c_str();
+            str.append(tmp);
+            str.append("\n");
         }
     }
 }

@@ -1,6 +1,8 @@
 #ifndef SMO_BUFFER_H
 #define SMO_BUFFER_H
+
 #include "Request.h"
+#include "QString"
 #include "properties.h"
 
 class Buffer {
@@ -12,7 +14,7 @@ public:
   Request pop();
   bool isFull() const;
   bool isEmpty() const;
-  void printBufferInfo() const;
+  void printBufferInfo(QString & str) const;
   int getCancelled() const;
 
 private:

@@ -16,7 +16,8 @@ public slots:
   void doWork();
   void setTrue();
 signals:
-  void string(const QString &);
+  void stringSend(const QString &);
+  void timeSend(const QString &);
 private:
   void printinfo(const Device *, const Source *, const Buffer *);
 };

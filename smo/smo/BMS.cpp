@@ -13,12 +13,11 @@ enum class BOS_TYPE {
 
 void BMS::printinfo(const Device * devices, const Source * sources, const Buffer * buffer)
 {
-  QString str("Devices: ");
+  QString str("Devices: \n");
   std::string a = std::to_string(1);
   QString tmp = a.c_str();
   std::cout << "Devices:\n";
   for (int i = 0; i < Properties::devicesNum; ++i) {
-    str.append("\t");
     a = std::to_string(devices[i].getNum());
     tmp = a.c_str();
     str.append(tmp);
@@ -62,8 +61,9 @@ void BMS::printinfo(const Device * devices, const Source * sources, const Buffer
   }
   str.append("Buffer:\n");
   std::cout << "Buffer:\n";
-  emit string(str);
-  buffer->printBufferInfo();
+
+  buffer->printBufferInfo(str);
+  emit stringSend(str);
   std::cout << "\n";
 }
 
@@ -71,7 +71,6 @@ void BMS::doWork() {
   flagEnd = false;
   srand(time(0));
   rand();
-
   Device devices[7] = { Device(1, Properties::lambdaDevices), Device(2, Properties::lambdaDevices), Device(3, Properties::lambdaDevices) };
   Source sources[7] = { Source(1, Properties::lambdaSources), Source(2, Properties::lambdaSources), Source(3, Properties::lambdaSources) };
   Buffer buffer(Properties::bufferCapacity);
@@ -81,7 +80,8 @@ void BMS::doWork() {
   std::string a = std::to_string(time);
   QString tmp = a.c_str();
   str.append(tmp);
-  emit string(str);
+  str.append("\n");
+  emit timeSend(str);
   std::cout << "Time: " << time << std::endl;
   printinfo(devices, sources, &buffer);
 
@@ -118,18 +118,50 @@ void BMS::doWork() {
         if (buffer.isEmpty()) {
           time = devices[tmpNum].release();
           std::cout << "Time: " << time << std::endl;
+          QString str("Time: ");
+          std::string a = std::to_string(time);
+          QString tmp = a.c_str();
+          str.append(tmp);
+          str.append("\n");
           std::cout << "Release of the device " << devices[tmpNum].getNum() << std::endl;
+          str.append("Release of the device ");
+          str.append(devices[tmpNum].getNum());
+          str.append("\n");
+          emit timeSend(str);
           printinfo(devices, sources, &buffer);
           std::cout << "Buffer is empty. Device is waiting\n";
+          QString str2("Buffer is empty. Device is waiting\n");
+          emit stringSend(str2);
           devices[tmpNum].wait();
           printinfo(devices, sources, &buffer);
         } else {
           time = devices[tmpNum].release();
           std::cout << "Time: " << time << std::endl;
+          QString str("Time: ");
+          std::string a = std::to_string(time);
+          QString tmp = a.c_str();
+          str.append(tmp);
+          str.append("\n");
           std::cout << "Release of the device " << devices[tmpNum].getNum() << std::endl;
+          str.append("Release of the device ");
+          str.append(devices[tmpNum].getNum());
+          str.append("\n");
+          emit timeSend(str);
           printinfo(devices, sources, &buffer);
+          QString str2("Placing a request from buffer on the device ");
+          str2.append(devices[tmpNum].getNum());
+          str2.append("\n");
           std::cout << "Placing a request from buffer on the device " << devices[tmpNum].getNum() << std::endl;
           Request r = buffer.pop();
+          str2.append("Request ");
+          str2.append(r.getRequestNumber()[0]);
+          str2.append(r.getRequestNumber()[1]);
+          str2.append(". Generation time ");
+          a = std::to_string(r.getGenerationTime());
+          tmp = a.c_str();
+          str2.append(tmp);
+          str2.append("\n");
+          stringSend(str2);
           std::cout << "Request " << r.getRequestNumber()[0] << r.getRequestNumber()[1]
                     << ". Generation time " << r.getGenerationTime() << std::endl;
           devices[tmpNum].take(time);
@@ -148,19 +180,52 @@ void BMS::doWork() {
         if (devNum != -1) {
           Request r = sources[tmpNum].generate(time);
           std::cout << "Time: " << time << " \n";
+          QString str("Time: ");
+          std::string a = std::to_string(time);
+          QString tmp = a.c_str();
+          str.append(tmp);
+          str.append("\n");
           std::cout << "Generating request. ";
+          str.append("Generating request. ");
           std::cout << "Request " << r.getRequestNumber()[0] << r.getRequestNumber()[1]
                     << ". Generation time " << r.getGenerationTime() << std::endl;
+          str.append("Request ");
+          str.append(r.getRequestNumber()[0]);
+          str.append(r.getRequestNumber()[1]);
+          str.append(". Generation time ");
+          a = std::to_string(r.getGenerationTime());
+          tmp = a.c_str();
+          str.append(tmp);
+          str.append("\n");
           std::cout << "Placing a request on the free device" << std::endl;
+          str.append("Placing a request on the free device");
+          str.append("\n");
+          emit timeSend(str);
           devices[devNum].take(time);
           printinfo(devices, sources, &buffer);
         } else {
           Request r = sources[tmpNum].generate(time);
           std::cout << "Time: " << time << " \n";
+          QString str("Time: ");
+          std::string a = std::to_string(time);
+          QString tmp = a.c_str();
+          str.append(tmp);
+          str.append("\n");
           std::cout << "Generating request. ";
+          str.append("Generating request. ");
           std::cout << "Request " << r.getRequestNumber()[0] << r.getRequestNumber()[1]
                     << ". Generation time " << r.getGenerationTime() << std::endl;
+          str.append("Request ");
+          str.append(r.getRequestNumber()[0]);
+          str.append(r.getRequestNumber()[1]);
+          str.append(". Generation time ");
+          a = std::to_string(r.getGenerationTime());
+          tmp = a.c_str();
+          str.append(tmp);
+          str.append("\n");
           std::cout << "No free devices. Placing a request in the buffer " << std::endl;
+          str.append("No free devices. Placing a request in the buffer \n");
+          emit timeSend(str);
           buffer.push(r);
           printinfo(devices, sources, &buffer);
         }

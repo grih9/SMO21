@@ -21,10 +21,12 @@ private slots:
   void on_nextButton_clicked();
   void on_retButton_clicked();
   void setMessage(const QString &);
+  void printTime(const QString &);
 signals:
   void next();
   void ret();
   void operate(const QString &);
+
 
 private:
   Ui::nextwindow * ui;
