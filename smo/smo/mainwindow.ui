@@ -52,8 +52,8 @@
       <widget class="QLabel" name="label">
        <property name="font">
         <font>
-         <family>Sitka Text</family>
-         <pointsize>24</pointsize>
+         <family>Verdana</family>
+         <pointsize>22</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -85,10 +85,22 @@
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QPushButton" name="autoButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>80</height>
+          </size>
+         </property>
          <property name="font">
           <font>
-           <family>Sitka</family>
-           <pointsize>24</pointsize>
+           <family>Verdana</family>
+           <pointsize>22</pointsize>
           </font>
          </property>
          <property name="cursor">
@@ -111,10 +123,16 @@ background-color: rgb(255, 255, 255);</string>
        </item>
        <item>
         <widget class="QPushButton" name="settingsButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>80</height>
+          </size>
+         </property>
          <property name="font">
           <font>
-           <family>Sitka</family>
-           <pointsize>24</pointsize>
+           <family>Verdana</family>
+           <pointsize>22</pointsize>
           </font>
          </property>
          <property name="cursor">
@@ -131,10 +149,16 @@ background-color: rgb(255, 255, 255);</string>
        </item>
        <item>
         <widget class="QPushButton" name="stepButton">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>80</height>
+          </size>
+         </property>
          <property name="font">
           <font>
-           <family>Sitka</family>
-           <pointsize>24</pointsize>
+           <family>Verdana</family>
+           <pointsize>22</pointsize>
           </font>
          </property>
          <property name="cursor">
@@ -173,8 +197,8 @@ background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="font">
      <font>
-      <family>Sitka</family>
-      <pointsize>9</pointsize>
+      <family>Verdana</family>
+      <pointsize>7</pointsize>
      </font>
     </property>
     <property name="styleSheet">

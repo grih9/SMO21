@@ -2,6 +2,7 @@
 #include "ui_settingswindow.h"
 #include "properties.h"
 #include <QMessageBox>
+#include <iostream>
 
 settingsWindow::settingsWindow(QWidget *parent) :
   QGroupBox(parent),
@@ -38,6 +39,7 @@ void settingsWindow::on_acceptButton_clicked()
   for (int i = 0; i < 6; i++) {
     buttonVisionFlag[i] = false;
   }
+
   checkbutton();
 
   QMessageBox msgBox;

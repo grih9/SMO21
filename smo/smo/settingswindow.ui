@@ -33,7 +33,7 @@
     <rect>
      <x>30</x>
      <y>10</y>
-     <width>631</width>
+     <width>675</width>
      <height>191</height>
     </rect>
    </property>
@@ -44,8 +44,8 @@
        <widget class="QLabel" name="label_6">
         <property name="font">
          <font>
-          <family>Sitka Display</family>
-          <pointsize>16</pointsize>
+          <family>Verdana</family>
+          <pointsize>14</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -67,8 +67,8 @@
          <widget class="QLabel" name="label">
           <property name="font">
            <font>
-            <family>Sitka</family>
-            <pointsize>13</pointsize>
+            <family>Verdana</family>
+            <pointsize>11</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -84,10 +84,16 @@
         </item>
         <item>
          <widget class="QSpinBox" name="sourcesNum">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>50</height>
+           </size>
+          </property>
           <property name="font">
            <font>
-            <family>Sitka</family>
-            <pointsize>17</pointsize>
+            <family>Verdana</family>
+            <pointsize>14</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -115,8 +121,8 @@
          <widget class="QLabel" name="label_2">
           <property name="font">
            <font>
-            <family>Sitka</family>
-            <pointsize>11</pointsize>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -132,10 +138,16 @@
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="lambdaSource">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>50</height>
+           </size>
+          </property>
           <property name="font">
            <font>
-            <family>Sitka</family>
-            <pointsize>17</pointsize>
+            <family>Verdana</family>
+            <pointsize>14</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -181,8 +193,8 @@
        <widget class="QLabel" name="label_5">
         <property name="font">
          <font>
-          <family>Sitka Display</family>
-          <pointsize>17</pointsize>
+          <family>Verdana</family>
+          <pointsize>14</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -202,10 +214,22 @@
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
          <widget class="QLabel" name="label_3">
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="baseSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="font">
            <font>
-            <family>Sitka</family>
-            <pointsize>13</pointsize>
+            <family>Verdana</family>
+            <pointsize>11</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -221,10 +245,16 @@
         </item>
         <item>
          <widget class="QSpinBox" name="devicesNum">
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>50</height>
+           </size>
+          </property>
           <property name="font">
            <font>
-            <family>Sitka</family>
-            <pointsize>17</pointsize>
+            <family>Verdana</family>
+            <pointsize>14</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -251,10 +281,16 @@ background-color: rgb(255, 170, 255);</string>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
          <widget class="QLabel" name="label_4">
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="font">
            <font>
-            <family>Sitka</family>
-            <pointsize>11</pointsize>
+            <family>Verdana</family>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -270,10 +306,16 @@ background-color: rgb(255, 170, 255);</string>
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="lambdaDevice">
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>50</height>
+           </size>
+          </property>
           <property name="font">
            <font>
-            <family>Sitka</family>
-            <pointsize>17</pointsize>
+            <family>Verdana</family>
+            <pointsize>14</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -308,7 +350,7 @@ background-color: rgb(255, 170, 255);</string>
      <x>30</x>
      <y>220</y>
      <width>311</width>
-     <height>111</height>
+     <height>113</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -318,8 +360,8 @@ background-color: rgb(255, 170, 255);</string>
        <widget class="QLabel" name="label_7">
         <property name="font">
          <font>
-          <family>Sitka</family>
-          <pointsize>12</pointsize>
+          <family>Verdana</family>
+          <pointsize>10</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -335,10 +377,16 @@ background-color: rgb(255, 170, 255);</string>
       </item>
       <item>
        <widget class="QSpinBox" name="bufferSize">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
         <property name="font">
          <font>
-          <family>Sitka</family>
-          <pointsize>17</pointsize>
+          <family>Verdana</family>
+          <pointsize>14</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -369,8 +417,8 @@ background-color: rgb(255, 170, 255);</string>
        <widget class="QLabel" name="label_8">
         <property name="font">
          <font>
-          <family>Sitka</family>
-          <pointsize>12</pointsize>
+          <family>Verdana</family>
+          <pointsize>10</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -386,10 +434,16 @@ background-color: rgb(255, 170, 255);</string>
       </item>
       <item>
        <widget class="QSpinBox" name="genNum">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>50</height>
+         </size>
+        </property>
         <property name="font">
          <font>
-          <family>Sitka</family>
-          <pointsize>17</pointsize>
+          <family>Verdana</family>
+          <pointsize>14</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -430,8 +484,8 @@ background-color: rgb(255, 170, 255);</string>
    </property>
    <property name="font">
     <font>
-     <family>Sitka</family>
-     <pointsize>14</pointsize>
+     <family>Verdana</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="cursor">
@@ -455,8 +509,8 @@ background-color: rgb(255, 170, 255);</string>
    </property>
    <property name="font">
     <font>
-     <family>Sitka</family>
-     <pointsize>15</pointsize>
+     <family>Verdana</family>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="cursor">
@@ -488,7 +542,7 @@ background-color: rgb(255, 170, 255);</string>
   <widget class="Line" name="line_2">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>365</x>
      <y>10</y>
      <width>20</width>
      <height>331</height>
@@ -509,8 +563,8 @@ background-color: rgb(255, 170, 255);</string>
    </property>
    <property name="font">
     <font>
-     <family>Sitka</family>
-     <pointsize>10</pointsize>
+     <family>Verdana</family>
+     <pointsize>8</pointsize>
     </font>
    </property>
    <property name="styleSheet">

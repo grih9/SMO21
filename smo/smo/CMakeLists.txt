@@ -55,6 +55,9 @@ else()
     settingswindow.cpp
     settingswindow.h
     settingswindow.ui
+    automode.h
+    automode.cpp
+    automode.ui
   )
 endif()
 

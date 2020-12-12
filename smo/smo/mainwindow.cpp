@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QStyleFactory>
 #include "./ui_mainwindow.h"
+#include "automode.h"
 
 MainWindow::MainWindow(QWidget * parent):
   QMainWindow(parent),
@@ -27,9 +28,9 @@ void MainWindow::on_stepButton_clicked()
 
 void MainWindow::on_autoButton_clicked()
 {
-  nextWindow = new nextwindow();
-  connect(nextWindow, &nextwindow::ret, this, &MainWindow::show);
-  nextWindow->show();
+  automode = new autoMode();
+  connect(automode, &autoMode::ret, this, &MainWindow::show);
+  automode->show();
   this->hide();
 }
 

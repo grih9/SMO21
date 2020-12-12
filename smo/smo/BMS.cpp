@@ -71,8 +71,14 @@ void BMS::doWork() {
   flagEnd = false;
   srand(time(0));
   rand();
-  Device devices[7] = { Device(1, Properties::lambdaDevices), Device(2, Properties::lambdaDevices), Device(3, Properties::lambdaDevices) };
-  Source sources[7] = { Source(1, Properties::lambdaSources), Source(2, Properties::lambdaSources), Source(3, Properties::lambdaSources) };
+  Device devices[7];
+  for (int i = 0; i < Properties::devicesNum; i++) {
+    devices[i] = Device(i + 1, Properties::lambdaDevices);
+  }
+  Source sources[7];
+  for (int i = 0; i < Properties::sourcesNum; i++) {
+    sources[i] = Source(i + 1, Properties::lambdaSources);
+  }
   Buffer buffer(Properties::bufferCapacity);
 
   double time = 0;
@@ -125,7 +131,9 @@ void BMS::doWork() {
           str.append("\n");
           std::cout << "Release of the device " << devices[tmpNum].getNum() << std::endl;
           str.append("Release of the device ");
-          str.append(devices[tmpNum].getNum());
+          a = std::to_string(devices[tmpNum].getNum());
+          tmp = a.c_str();
+          str.append(tmp);
           str.append("\n");
           emit timeSend(str);
           printinfo(devices, sources, &buffer);
@@ -144,18 +152,26 @@ void BMS::doWork() {
           str.append("\n");
           std::cout << "Release of the device " << devices[tmpNum].getNum() << std::endl;
           str.append("Release of the device ");
-          str.append(devices[tmpNum].getNum());
+          a = std::to_string(devices[tmpNum].getNum());
+          tmp = a.c_str();
+          str.append(tmp);
           str.append("\n");
           emit timeSend(str);
           printinfo(devices, sources, &buffer);
           QString str2("Placing a request from buffer on the device ");
-          str2.append(devices[tmpNum].getNum());
+          a = std::to_string(devices[tmpNum].getNum());
+          tmp = a.c_str();
+          str2.append(tmp);
           str2.append("\n");
           std::cout << "Placing a request from buffer on the device " << devices[tmpNum].getNum() << std::endl;
           Request r = buffer.pop();
           str2.append("Request ");
-          str2.append(r.getRequestNumber()[0]);
-          str2.append(r.getRequestNumber()[1]);
+          a = std::to_string(r.getRequestNumber()[0]);
+          tmp = a.c_str();
+          str2.append(tmp);
+          a = std::to_string(r.getRequestNumber()[1]);
+          tmp = a.c_str();
+          str2.append(tmp);
           str2.append(". Generation time ");
           a = std::to_string(r.getGenerationTime());
           tmp = a.c_str();
@@ -190,8 +206,12 @@ void BMS::doWork() {
           std::cout << "Request " << r.getRequestNumber()[0] << r.getRequestNumber()[1]
                     << ". Generation time " << r.getGenerationTime() << std::endl;
           str.append("Request ");
-          str.append(r.getRequestNumber()[0]);
-          str.append(r.getRequestNumber()[1]);
+          a = std::to_string(r.getRequestNumber()[0]);
+          tmp = a.c_str();
+          str.append(tmp);
+          a = std::to_string(r.getRequestNumber()[1]);
+          tmp = a.c_str();
+          str.append(tmp);
           str.append(". Generation time ");
           a = std::to_string(r.getGenerationTime());
           tmp = a.c_str();
@@ -216,8 +236,12 @@ void BMS::doWork() {
           std::cout << "Request " << r.getRequestNumber()[0] << r.getRequestNumber()[1]
                     << ". Generation time " << r.getGenerationTime() << std::endl;
           str.append("Request ");
-          str.append(r.getRequestNumber()[0]);
-          str.append(r.getRequestNumber()[1]);
+          a = std::to_string(r.getRequestNumber()[0]);
+          tmp = a.c_str();
+          str.append(tmp);
+          a = std::to_string(r.getRequestNumber()[1]);
+          tmp = a.c_str();
+          str.append(tmp);
           str.append(". Generation time ");
           a = std::to_string(r.getGenerationTime());
           tmp = a.c_str();

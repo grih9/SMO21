@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "nextwindow.h"
+#include "automode.h"
 #include "settingswindow.h"
 
 QT_BEGIN_NAMESPACE
@@ -27,6 +28,7 @@ private:
   Ui::MainWindow * ui;
   settingsWindow * settings;
   nextwindow * nextWindow;
+  autoMode * automode;
 };
 
 #endif
