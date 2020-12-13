@@ -1,12 +1,14 @@
 #ifndef SMO_DEVICE_H
 #define SMO_DEVICE_H
 
+#include <QString>
+
 class Device {
 public:
     Device();
     Device(int, double);
 
-    double take(double);
+    double take(double, QString &);
     double release();
     void wait();
     double getReleaseTime() const;

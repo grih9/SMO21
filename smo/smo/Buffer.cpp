@@ -19,7 +19,7 @@ Buffer::Buffer(int capacity):
     }
 }
 
-bool Buffer::push(Request request)
+int Buffer::push(Request request, QString & str)
 {
     if (volume_ != capacity_) {
         while (buf_[pushPosition_].getGenerationTime() != -1) {
@@ -27,10 +27,15 @@ bool Buffer::push(Request request)
             pushPosition_ = pushPosition_ % capacity_;
         }
         std::cout << "Insert in " << pushPosition_ << std::endl;
+        str.append("Insert in ");
+        std::string a = std::to_string(pushPosition_);
+        QString tmp = a.c_str();
+        str.append(tmp);
+        str.append("\n");
         buf_[pushPosition_] = request;
         volume_++;
         pushPosition_ = (pushPosition_ + 1) % capacity_;
-        return true;
+        return 0;
     } else {
         int minNum = 0;
         double minTime = buf_[0].getGenerationTime();
@@ -42,11 +47,31 @@ bool Buffer::push(Request request)
         }
         std::cout << "Removed request " << buf_[minNum].getRequestNumber()[0] << buf_[minNum].getRequestNumber()[1]
                   << " with generationTime " << minTime << " from " << minNum << std::endl;
+        str.append("Removed request ");
+        int retVal = buf_[minNum].getRequestNumber()[0];
+        std::string a = std::to_string(buf_[minNum].getRequestNumber()[0]);
+        QString tmp = a.c_str();
+        str.append(tmp);
+        a = std::to_string(buf_[minNum].getRequestNumber()[1]);
+        tmp = a.c_str();
+        str.append(tmp);
+        str.append(" with generationTime ");
+        a = std::to_string(minTime);
+        tmp = a.c_str();
+        str.append(tmp);
+        str.append(" from ");
+        a = std::to_string(minNum);
+        tmp = a.c_str();
+        str.append(tmp);
+        str.append("\n");
         buf_[minNum] = request;
         cancelled_++;
         std::cout << "Insert in " << minNum << std::endl;
+        str.append("Insert in ");
+        str.append(minNum);
+        str.append("\n");
         pushPosition_ = (minNum + 1) % capacity_;
-        return false;
+        return retVal;
     }
 }
 
@@ -54,7 +79,7 @@ int Buffer::getCancelled() const
 {
   return cancelled_;
 }
-Request Buffer::pop()
+Request Buffer::pop(QString & str)
 {
     if (volume_ != 0) {
         while (buf_[popPosition_].getGenerationTime() == -1) {
@@ -63,12 +88,18 @@ Request Buffer::pop()
         }
         Request tmp = buf_[popPosition_];
         std::cout << "Extract from " << popPosition_ << std::endl;
+        str.append("Extract from ");
+        std::string a = std::to_string(popPosition_);
+        QString tmps = a.c_str();
+        str.append(tmps);
+        str.append("\n");
         buf_[popPosition_] = Request();
         --volume_;
         popPosition_ = (popPosition_ + 1) % capacity_;
         return tmp;
     } else {
         std::cerr << "Buffer is empty\n";
+        str.append("Buffer is empty\n");
         throw std::range_error("Buffer is empty\n");
     }
 }

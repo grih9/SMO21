@@ -43,6 +43,7 @@ void nextwindow::on_nextButton_clicked()
 
 void nextwindow::setMessage(const QString & tmp)
 {
+  ui->textBrowser->verticalScrollBar()->setValue(ui->textBrowser->verticalScrollBar()->maximum());
   QString text = ui->textBrowser->toPlainText();
   if (!text.isEmpty()) {
     text += "\n";
@@ -53,6 +54,7 @@ void nextwindow::setMessage(const QString & tmp)
 
 void nextwindow::printTime(const QString & tmp)
 {
+  ui->textBrowser->verticalScrollBar()->setValue(ui->textBrowser->verticalScrollBar()->maximum());
   std::string a = std::to_string(counter);
   QString count = a.c_str();
   count.append(")------------------------------------------------------------\n");

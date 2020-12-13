@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>714</width>
-    <height>577</height>
+    <width>1172</width>
+    <height>573</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,15 +16,32 @@
   <widget class="QPushButton" name="backButton">
    <property name="geometry">
     <rect>
-     <x>562</x>
-     <y>420</y>
+     <x>1050</x>
+     <y>520</y>
      <width>111</width>
      <height>51</height>
     </rect>
    </property>
-   <property name="text">
-    <string>backButton</string>
+   <property name="font">
+    <font>
+     <family>Verdana</family>
+     <pointsize>10</pointsize>
+    </font>
    </property>
+   <property name="text">
+    <string>НАЗАД</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>1131</width>
+     <height>481</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout"/>
   </widget>
  </widget>
  <resources/>

@@ -10,8 +10,8 @@ public:
   Buffer();
   Buffer(int);
 
-  bool push(Request request);
-  Request pop();
+  int push(Request request, QString &);
+  Request pop(QString & str);
   bool isFull() const;
   bool isEmpty() const;
   void printBufferInfo(QString & str) const;

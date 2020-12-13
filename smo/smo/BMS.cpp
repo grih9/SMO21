@@ -50,12 +50,17 @@ void BMS::printinfo(const Device * devices, const Source * sources, const Buffer
     a = std::to_string(sources[i].getSourceCount());
     tmp = a.c_str();
     str.append(tmp);
+    str.append(", Cancelled: ");
+    a = std::to_string(sources[i].getSourceCancelled());
+    tmp = a.c_str();
+    str.append(tmp);
     str.append(", Next request: ");
     a = std::to_string(sources[i].getNextReqTime());
     tmp = a.c_str();
     str.append(tmp);
     str.append("\n");
-    std::cout << "\t" << sources[i].getSourceNum() << ". Generated: " << sources[i].getSourceCount() << ", Next request: "
+    std::cout << "\t" << sources[i].getSourceNum() << ". Generated: " << sources[i].getSourceCount()
+              << ", Cancelled: " << sources[i].getSourceCancelled() << ", Next request: "
               << sources[i].getNextReqTime() << "\n";
 
   }
@@ -164,7 +169,7 @@ void BMS::doWork() {
           str2.append(tmp);
           str2.append("\n");
           std::cout << "Placing a request from buffer on the device " << devices[tmpNum].getNum() << std::endl;
-          Request r = buffer.pop();
+          Request r = buffer.pop(str2);
           str2.append("Request ");
           a = std::to_string(r.getRequestNumber()[0]);
           tmp = a.c_str();
@@ -177,10 +182,10 @@ void BMS::doWork() {
           tmp = a.c_str();
           str2.append(tmp);
           str2.append("\n");
-          stringSend(str2);
           std::cout << "Request " << r.getRequestNumber()[0] << r.getRequestNumber()[1]
                     << ". Generation time " << r.getGenerationTime() << std::endl;
-          devices[tmpNum].take(time);
+          devices[tmpNum].take(time, str2);
+          stringSend(str2);
           printinfo(devices, sources, &buffer);
         }
         break;
@@ -220,8 +225,8 @@ void BMS::doWork() {
           std::cout << "Placing a request on the free device" << std::endl;
           str.append("Placing a request on the free device");
           str.append("\n");
+          devices[devNum].take(time, str);
           emit timeSend(str);
-          devices[devNum].take(time);
           printinfo(devices, sources, &buffer);
         } else {
           Request r = sources[tmpNum].generate(time);
@@ -249,8 +254,9 @@ void BMS::doWork() {
           str.append("\n");
           std::cout << "No free devices. Placing a request in the buffer " << std::endl;
           str.append("No free devices. Placing a request in the buffer \n");
+          int cancelled = buffer.push(r, str);
+          sources[cancelled - 1].cancell();
           emit timeSend(str);
-          buffer.push(r);
           printinfo(devices, sources, &buffer);
         }
         break;
