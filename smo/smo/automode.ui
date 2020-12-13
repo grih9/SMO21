@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1172</width>
-    <height>573</height>
+    <width>1400</width>
+    <height>1000</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="backButton">
    <property name="geometry">
     <rect>
-     <x>1050</x>
-     <y>520</y>
+     <x>1280</x>
+     <y>940</y>
      <width>111</width>
      <height>51</height>
     </rect>
@@ -25,23 +25,53 @@
    <property name="font">
     <font>
      <family>Verdana</family>
-     <pointsize>10</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
     <string>НАЗАД</string>
    </property>
   </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>1131</width>
-     <height>481</height>
+     <x>10</x>
+     <y>10</y>
+     <width>1381</width>
+     <height>921</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout"/>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLabel" name="infoLabel">
+        <property name="font">
+         <font>
+          <family>Verdana</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>INFO</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="pOtk"/>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="usageKoef"/>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="tbpdisp"/>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="tobsldisp"/>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

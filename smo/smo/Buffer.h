@@ -18,7 +18,7 @@ public:
   int getCancelled() const;
 
 private:
-  Request buf_[10];
+  Request buf_[11];
   int capacity_;
   int cancelled_;
   int pushPosition_;

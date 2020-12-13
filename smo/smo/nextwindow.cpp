@@ -15,7 +15,7 @@ nextwindow::nextwindow(QWidget * parent) :
   programm->moveToThread(&programmThread);
   ui->setupUi(this);
   connect(this, &nextwindow::next, programm, &BMS::setTrue);
-  connect(this, &nextwindow::operate, programm, &BMS::doWork);
+  connect(this, &nextwindow::operate, programm, &BMS::stepByStep);
   connect(programm, &BMS::stringSend, this, &nextwindow::setMessage);
   connect(programm, &BMS::timeSend, this, &nextwindow::printTime);
   programmThread.start();

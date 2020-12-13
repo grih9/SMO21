@@ -2,6 +2,7 @@
 #define AUTOMODE_H
 
 #include <QFrame>
+#include <QLineSeries>
 
 namespace Ui {
 class autoMode;
@@ -17,6 +18,10 @@ public:
 
 private slots:
   void on_backButton_clicked();
+  void addPotk(int, QtCharts::QLineSeries *);
+  void addUsageKoef(int, QtCharts::QLineSeries *, QtCharts::QLineSeries *);
+  void addtbp(int, QtCharts::QLineSeries *, QtCharts::QLineSeries *);
+  void addtobsl(int, QtCharts::QLineSeries *, QtCharts::QLineSeries *);
 
 signals:
   void ret();

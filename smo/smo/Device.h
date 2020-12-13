@@ -16,8 +16,10 @@ public:
     bool isWaiting() const;
     int getNum() const;
     int getNumberOfTaken() const;
+    double getWorkingTime() const;
 
 private:
+    double workingTime_;
     double lambda_;
     int numberOfTaken_;
     double releaseTime_;
